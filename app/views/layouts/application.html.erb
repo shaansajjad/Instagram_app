@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,21 +15,13 @@
               <div class="navbar-header">
                 <a class="navbar-brand" href="#">Instagram</a>
               </div>
-              <ul class="nav navbar-nav">
-                <li>
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">About</a>
-                </li>
-                <li>
-                  <a href="#">Contact</a>
-                </li>
-              </ul>
+              
               <ul class="nav navbar-nav navbar-right"><% if user_signed_in? %>
+                <li><%= link_to "New_Post", new_post_path, class: "glyphicon glyphicon-user"%></li>
                 <li><%= link_to "Sign_out", destroy_user_session_path, :method => 'delete' %>
                 </li>
-                <li><%= link_to "Profile", edit_user_registration_path, class: "glyphicon glyphicon-user"%>
+                
+                <li><%= link_to current_user.first_name+ ""+current_user.last_name, edit_user_registration_path, class: "glyphicon glyphicon-user"%>
                 </li><% else %>
                 <li><%= link_to "Login", new_user_session_path, class: "glyphicon glyphicon-log-in" %>
                 </li>
@@ -41,4 +34,4 @@
         <div class= "container"><% flash.each do |name,msg| %><%= content_tag(:div, msg, class: "alert alert-info") %><% end %><%= yield %>
         </div>
       </body>
-    </html>
+</html>

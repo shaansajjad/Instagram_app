@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
 gem 'devise', '~> 4.2'
+gem "paperclip", "~> 6.0.0"
+gem 'acts_as_votable', '~> 0.11.1'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
