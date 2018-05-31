@@ -1,28 +1,27 @@
   class CommentsController < ApplicationController
-  before_action :set_post
+    before_action :set_post
 
-  def index
+    def index
       @comments = @post.comments.order('created_at asc')
 
       respond_to do |format|
         format.html { render layout: !request.xhr? }
       end
     end
+   def create
+      @comment = @post.comments.build(comment_params)
+      @comment.user_id = current_user.id
 
-  def create
-    @comment = @post.comments.build(comment_params)
-    @comment.user_id = current_user.id
-
-    if @comment.save
+      if @comment.save
       # create_notification @post, @comment
-        respond_to do |format|
-          format.html { redirect_to posts_path }
-          format.js
-        end
-      else
-        flash[:alert] = 'Check the comment form, something went wrong.'
-        render root_path
+      respond_to do |format|
+        format.html { redirect_to posts_path }
+        format.js
       end
+    else
+      flash[:alert] = 'Check the comment form, something went wrong.'
+      render root_path
+    end
   end
 
   def destroy
@@ -42,4 +41,4 @@
   def set_post
     @post = Post.find(params[:post_id])
   end
-  end
+end

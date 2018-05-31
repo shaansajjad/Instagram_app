@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522115218) do
+ActiveRecord::Schema.define(version: 20180529104604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,14 +25,14 @@ ActiveRecord::Schema.define(version: 20180522115218) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.integer "count"
-    t.bigint "posts_id"
-    t.bigint "users_id"
+  create_table "follows", force: :cascade do |t|
+    t.integer "following_id", null: false
+    t.integer "follower_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["posts_id"], name: "index_likes_on_posts_id"
-    t.index ["users_id"], name: "index_likes_on_users_id"
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.index ["following_id", "follower_id"], name: "index_follows_on_following_id_and_follower_id", unique: true
+    t.index ["following_id"], name: "index_follows_on_following_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 20180522115218) do
     t.datetime "image_updated_at"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,6 +71,10 @@ ActiveRecord::Schema.define(version: 20180522115218) do
     t.string "last_name"
     t.date "birthday"
     t.string "Username"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -84,7 +95,6 @@ ActiveRecord::Schema.define(version: 20180522115218) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
-  add_foreign_key "likes", "posts", column: "posts_id"
-  add_foreign_key "likes", "users", column: "users_id"
   add_foreign_key "posts", "users"
+  add_foreign_key "profiles", "users"
 end

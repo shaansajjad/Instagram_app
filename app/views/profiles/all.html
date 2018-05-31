@@ -1,0 +1,18 @@
+
+<h1>show</h1>
+<% @users = User.all %>
+<% @users.each do |user| %>
+<%= image_tag user.avatar%>
+
+<%= user.email %><br/>
+<%= user.followers.count %>
+<% end %>
+
+
+<% form_tag profiles_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+

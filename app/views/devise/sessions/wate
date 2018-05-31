@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+</head>
+<body>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+ <form class="ui form">
+  <div class="ui grid">
+    <div class="ten wide column"></div>
+    <div class="six wide column">
+      <h2>Log in to Instagram</h2>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+  </div>
+
+  <div class="ui grid">
+    <div class="ten wide column"></div>
+    <div class="six wide column">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+  <div class="ui grid">
+    <div class="ten wide column"></div>
+    <div class="six wide column">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  </div>
+  <% end -%>
+
+  <div class="ui grid">
+    <div class="ten wide column"></div>
+    <div class="six wide column">
+      <%= f.submit "Log in" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="ui grid">
+    <div class="ten wide column"></div>
+    <div class="six wide column">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</form>
+
+
+</body>
+</html>

@@ -1,3 +1,41 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.image, username {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 40%;
+
+}
+
+.image_description, .username, .comment-form, .img-div{
+
+margin-left: auto;
+margin-right: auto;
+width: 40%;
+}
+
+.username{
+  margin-top:2rem;
+  font-size:1.5rem;
+  color:blue;
+}
+
+.full-body{
+  margin: 0 0 20px;
+  padding: 30px;
+  width: 320;
+  
+}
+
+
+.round-image{  
+    margin-top: 40px;  
+    margin-bottom: -18px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}

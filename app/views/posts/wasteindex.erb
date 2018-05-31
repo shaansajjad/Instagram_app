@@ -1,124 +1,141 @@
-<% @post.each do |x| %>
+//// Newwww////////////////
 
-<%if @post.user.id == current_user.id %>
+<h1>New Post</h1>
 
-<div class="white">
-<%= image_tag x.image.url(:medium) %>
+<hr>
+
+<%= form_for @post, html: { multipart: true } do |f| %>
+
+<%= f.label :image %>
+<%= f.file_field :image %>
 <br>
-<%= x.description %>
-<td><%= link_to 'Edit', edit_post_path(x), class: "btn btn-info" %></td>
-<td><%= link_to 'Destroy', post_path(x),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } , class: "btn btn-info"%></td>
 
-	</div>
-</td>
+<%= f.label :description %>
 
-<%else%>
-
-<div class="white">
-<%= image_tag x.image.url(:medium) %>
+<%= f.text_area :description %>
 <br>
-<%= x.description %>
-</div>
 
-<% end %>
+
+<%= f.submit %>
+
 <% end %>
 
 
-////////////////////////////////////////////////////
+
+
+///////////////////// INdexxxxxxxxx/////////////////////
 
 
 
-
-
-
-
-<div class="posts-wrapper row">
-  <% @post.each do |post| %>
-    <div class="post">
-      <div class="post-head">
-<!--         <div class="thumb-img"></div>
- -->        <!-- <div class="user-name">
-          <%= post.user.user_name %>
-        </div> -->
-      <!-- </div> -->
-      <div class="image center-block">
-        <%= link_to (image_tag post.image.url(:medium), class:'img-responsive'), post_path(post) %>
-      </div>
-      <div class="post-bottom">
-        <div class="caption">
-          <!-- <div class="user-name">
-            <%= post.user.user_name %>
-          </div> -->
-          <%= post.caption %>
-        </div>
-        <% if post.comments %>
-          <% post.comments.each do |comment| %>
-            <div class="comment">
-              <div class="user-name">
-                <%= comment.user.user_name %>
-              </div>
-              <div class="comment-content">
-                <%= comment.content %>
-              </div>
-              <% if comment.user == current_user %>
-                <%= link_to post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?" } %>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-        <div class="comment-form">
-          <%= form_for [post, post.comments.new] do |f| %>
-            <%= f.text_field :content, placeholder: 'Add a comment...' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-
-
-
-
-
-
-
-
-
-////////////// finaalalllllll////////////////////
-
-
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<div class="full-body">
 <% @posts.each do |x| %>
-
-<%= x.user.first_name if x.user %>
-<% if x.user_id == current_user.id %>
-
-
-
-<div class="white">
-<%= image_tag x.image.url(:medium) %>
-<br>
-<%= x.description %>
-<td><%= link_to 'Edit', edit_post_path(x), class: "btn btn-info" %></td>
-<td><%= link_to 'Destroy', post_path(x),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } , class: "btn btn-info"%></td>
-
+<div class="img-div">
+    <%= image_tag(x.user.avatar.url(:thumb), :class => "round-image") %>
+ </div>
+  <div class="username">
+    
+  <b><%= x.user.first_name if x.user %></b> 
+  <%= time_ago_in_words x.created_at %>
   </div>
-</td>
-
+<% if x.user_id == current_user.id %>
+   <div class="admin">
+    <div class="image"><%= image_tag x.image.url(:medium) %><br></div>
+     <div class="image_description">
+      <b><%= x.user.first_name if x.user %>
+      </b><%= x.description %>
+        <div class="image_action">
+        <td><%= link_to 'Edit', edit_post_path(x), class: "btn btn-info" %>
+        </td>
+        <td><%= link_to 'Destroy', post_path(x), method: :delete,
+        data: { confirm: 'Are you sure?' } , class: "btn btn-info"%>
+        </td>
+        </div>
+       </div>
+     </div>
 <%else%>
-
-<div class="white">
-<%= image_tag x.image.url(:medium) %>
-<br>
-<%= x.description %>
+<div class="non-admin">
+  <div class="image">
+    <%= image_tag x.image.url(:medium) %><br>
+  </div>
+  <div class="test">
+    <div class="image_description">
+      <b><%= x.user.first_name if x.user %></b>
+      <%= x.description %>
+    </div>
+  </div>
 </div>
-
+<% end %> 
+    <div class="comment-form">
+      <% if x.comments %>
+        <% x.comments.each do |comment| %>
+            <b><%= comment.user.first_name %>
+            </b><%= comment.content %><br>
+        <% end %>
+      <% end %>
+        <%= form_for [x, x.comments.new] do |f| %>
+          <%= f.text_field :content, placeholder: 'Add a comment...'%>
+        <% end %>
+    </div>
 <% end %>
+</div>
+</body>
+</html>
 
-<% end %>
 
+
+\\
+
+
+
+cssssss
+
+
+
+
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.image, username {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 40%;
+
+}
+
+.image_description, .username, .comment-form, .img-div{
+
+margin-left: auto;
+margin-right: auto;
+width: 40%;
+}
+
+.username{
+  margin-top:2rem;
+  font-size:1.5rem;
+  color:blue;
+}
+
+.full-body{
+  margin: 0 0 20px;
+  padding: 30px;
+  width: 320;
+  
+}
+
+
+.round-image{  
+    margin-top: 40px;  
+    margin-bottom: -18px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}

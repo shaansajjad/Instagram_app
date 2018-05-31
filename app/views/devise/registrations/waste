@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+</head>
+<body>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %><%= devise_error_messages! %>
+	<form class="ui form" >
+		<div class="ui grid">
+			<div class="ten wide column"></div>
+			<div class="six wide column">
+				<h2>Sign up</h2>
+				<div class="field">
+					<%= f.label :first_name %>
+					<br /><%= f.text_field :first_name, autofocus: true %>
+				</div>
+				<div class="field">
+					<%= f.label :last_name %>
+					<br /><%= f.text_field :last_name, autofocus: true %>
+				</div>
+
+				<div class="field">
+					<%= f.label :Username %>
+					<br /><%= f.text_field :Username, autofocus: true %>
+				</div>
+				<div class="field">
+					<%= f.label :email %>
+					<br /><%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+				</div>
+				<div class="field">
+					<%= f.label :birthday %>
+					<br /><%= f.date_field :birthday, autofocus: true %>
+				</div>
+				<div class="field">
+					<%= f.label :password %><% if @minimum_password_length %>
+					<em>(<%= @minimum_password_length %> characters minimum)</em>
+					<% end %>
+					<br />
+					<%= f.password_field :password, autocomplete: "off" %>
+				</div>
+				<div class="field">
+					<%= f.label :password_confirmation %>
+					<br /><%= f.password_field :password_confirmation, autocomplete: "off" %>
+				</div>
+				<div class="actions">
+					<%= f.submit "Sign up" %>
+				</div>
+				<% end %>
+				<%= render "devise/shared/links" %>
+			</form>
+		</div>
+	</div>
+	
+
+</body>
+</html>
+

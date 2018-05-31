@@ -1,0 +1,22 @@
+
+<div class="col-md-4">
+<% @user = current_user %>
+
+<%= image_tag @user.avatar%>
+
+<%= @user.email %><br/>
+
+<% @user ||= current_user %>
+
+<div>		  
+	<strong id="following">
+		<%= @user.following.count %>
+	</strong>following
+	
+<strong id="followers">
+	<%= @user.followers.count %>
+</strong>followers
+</a>
+</div>
+</div>
+

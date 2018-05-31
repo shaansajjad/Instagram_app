@@ -1,8 +1,6 @@
 class Post < ApplicationRecord
 	has_many :likes
 
-
-
 	validates :user_id, presence: true
 
 	belongs_to :user
