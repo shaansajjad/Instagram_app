@@ -2,32 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .image, username {
-display: block;
-margin-left: auto;
-margin-right: auto;
-width: 40%;
-
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
 
-.image_description, .username, .comment-form, .img-div{
-
-margin-left: auto;
-margin-right: auto;
-width: 40%;
+.image_description, .username{
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    position: relative;
 }
 
 .username{
-  margin-top:2rem;
-  font-size:1.5rem;
-  color:blue;
+      position: relative;
+    top: -44px;
+    margin-top:2rem;
+    font-size:1rem;
+    color:blue;
 }
 
 .full-body{
-  margin: 0 0 20px;
-  padding: 30px;
-  width: 320;
+    margin: 0 0 20px;
+    padding: 30px;
+    width: 320;
   
 }
 
@@ -39,3 +39,63 @@ width: 40%;
     height: 50px;
     border-radius: 50px;
 }
+
+
+
+.post-body{
+    position: relative;
+    left: 132px;
+    box-sizing: content-box;
+    border: solid 1px grey;
+    background-color: white;
+    width: 500px;
+    height: 600px;
+}
+
+.img-div{
+    position: relative;
+    left: 10px;
+    top: 25px; 
+    width: 40%;
+}
+
+.comment-form{
+
+    left: -150px;
+    top: 30px;
+    }
+
+
+.admin, .non-admin{
+    position: relative;
+    left: -150px;
+}
+
+.comment-label{
+    position: relative;
+    left: 132px;
+}
+
+
+.post-loves {
+  padding: 14px 0px;
+}
+
+.loves {
+    font-size: 14px;
+margin-top: 10px;
+font-weight: 500
+  }
+
+  
+  .l-b-w{
+    position: absolute;
+    background-position: 1px -55px;
+    width: 95px;
+    height: 78px;
+    top: 40%;
+    left: 42%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .6s ease;
+  }

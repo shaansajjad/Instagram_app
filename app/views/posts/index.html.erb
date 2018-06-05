@@ -1,63 +1,67 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-  <title></title>
-</head>
-<body>
-<div class="full-body">
-<% @posts.each do |x| %>
+  <head>
+    <title></title>
+  </head>
+  <body>
+<div class="full-body"><% @posts.each do |x| %>
+<div class="post-body">
 <div class="img-div">
-    <%= image_tag(x.user.avatar.url(:thumb), :class => "round-image") %>
-	 
- </div>
+  <%= image_tag(x.user.avatar.url(:thumb),  :class => "round-image") %>
   <div class="username">
-  <b><%= x.user.first_name if x.user %></b> 
-  <%= time_ago_in_words x.created_at %>
-  </div>
-
-<% if x.user_id == current_user.id %>
-
-   <div class="admin">
-    <div class="image"><%= image_tag x.image.url(:medium) %><br></div>
-     <div class="image_description">
-      <b><%= x.user.first_name if x.user %>
-      </b><%= x.description %>
+    <b><%= x.user.first_name if x.user %>
+    </b>
+    <br><%= time_ago_in_words x.created_at %>
+    </div>
+  </div><% if x.user_id == current_user.id %>
+  <div class="admin">
+    <div class="image"><%= image_tag x.image.url(:medium) %>
+      <br>
+      </div>
+      <div class="image_description">
+        <b><%= x.user.first_name if x.user %>
+        </b><%= x.description %>
         <div class="image_action">
-        <td><%= link_to 'Edit', edit_post_path(x), class: "btn btn-info" %>
-        </td>
-        <td><%= link_to 'Destroy', post_path(x), method: :delete,
+          <td><%= link_to 'Edit', edit_post_path(x), class: "btn btn-info" %>
+          </td>
+          <td><%= link_to 'Destroy', post_path(x), method: :delete,
         data: { confirm: 'Are you sure?' } , class: "btn btn-info"%>
-        </td>
+          </td>
         </div>
-       </div>
-     </div>
-<%else%>
-<div class="non-admin">
-  <div class="image">
-    <%= image_tag x.image.url(:medium) %><br>
-  </div>
-  <div class="test">
-    <div class="image_description">
-      <b><%= x.user.first_name if x.user %></b>
-      <%= x.description %>
-    </div>
-  </div>
-</div>
-<% end %> 
-    <div class="comment-form">
-      <% if x.comments %>
-        <% x.comments.each do |comment| %>
-            <b><%= comment.user.first_name %>
-            </b><%= comment.content %><br>
-        <% end %>
-      <% end %>
-        <%= form_for [x, x.comments.new] do |f| %>
-          <%= f.text_field :content, placeholder: 'Add a comment...'%>
-        <% end %>
-    </div>
-<% end %>
-</div>
-</body>
-</html>
+      </div>
+    </div><%else%>
+    <div class="non-admin">
+      <div class="image"><%= image_tag x.image.url(:medium) %>
+        <br>
+        </div>
+        <div class="test">
+          <div class="image_description">
+            <b><%= x.user.first_name if x.user %>
+            </b><%= x.description %>
+          </div>
+        </div>
+      </div><% end %>
+      <div class="post-loves">
+        <!--     <button class="glyphicon glyphicon-heart" data-method="post">
+-->
+        <h2 class="loves"><%= pluralize(number_to_human(x.likes.count), 'Like') %>
+        </h2>
+      </div>
 
+      <div class="comment-form"><% if x.comments %><% x.comments.each do |comment| %>
+        <b><%= comment.user.first_name %>
+        </b><%= comment.content %>
+        <br><% end %><% end %>
+        </div>
+      </div>
 
+      <div class="comment-label"><%= form_for [x, x.comments.new] do |f| %><%= f.text_field :content, placeholder: 'Add a comment...'%><% end %>
+      </div>
+      
+      <div>
+        <br>
+        </div><% end %>
+      </div>
+    </body>
+  </html>

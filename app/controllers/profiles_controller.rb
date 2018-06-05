@@ -1,13 +1,14 @@
 class ProfilesController < ApplicationController
 	
-def index
-      @profiles = Profile.all
-    end
+	def index
+		@users = User.all
+		@profiles = Profile.all
+	end
 
 
-    def show
-     end
+	def show
 
+	end
 	
 
 end

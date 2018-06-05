@@ -1,0 +1,32 @@
+Discover New  People
+    <% @users.each do |user| %>
+<div class="block">
+      <div class="flex-row header">
+
+  <%= user.first_name+""+ user.last_name %>
+  <%= image_tag(user.avatar ? user.avatar : 'avatar_default.png', :class => "profile-img rounded-circle", :size => "28x28") %> 
+
+
+<% if user == current_user %>
+
+  <%= link_to 'Edit Profile', profiles_path, :class=> "btn edit-button"%> 
+<% else %>
+
+  <% if current_user_is_following(current_user.id, user.id) %>
+
+    <%= link_to 'Following', unfollow_user_path, :remote=> true, :class=> "btn unfollow-button", :id=> "unfollow-button", :method=> post %>
+
+  <% else %>
+
+    <%= link_to 'Follow', follow_user_path, :remote=> true, :class=> "btn follow-button", :id=> "follow-button", :method=> post %>
+  <% end %>
+<% end %>
+</div>
+</div>
+<% end %>
+
+
+
+
+
+

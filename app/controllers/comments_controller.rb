@@ -8,7 +8,7 @@
         format.html { render layout: !request.xhr? }
       end
     end
-   def create
+    def create
       @comment = @post.comments.build(comment_params)
       @comment.user_id = current_user.id
 

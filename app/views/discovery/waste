@@ -1,0 +1,30 @@
+
+     Discover New  People
+    <% @users.each do |user| %>
+
+    <div class="block">
+      <div class="flex-row header">
+        <% if @user == current_user %>
+                <%= link_to "My profile", profiles_path, 
+                  class: "btn edit-button"%>
+          <%= user.first_name+""+ user.last_name %>
+          <%= image_tag(user.avatar ? user.avatar : 'avatar_default.png', :class => "profile-img rounded-circle", :size => "28x28") %> 
+            
+               <% else %>   
+               <%= user.first_name+""+ user.last_name %>
+               <%= image_tag(user.avatar ? user.avatar : 'avatar_default.png', :class => "profile-img rounded-circle", :size => "28x28") %>     
+          <button class="btn btn-follow" data-method="post">
+            Follow
+          </button>
+          <button class="btn btn-unfollow hide" data-method="delete">
+            Unfollow
+          </button>
+          <% end %>
+        </div>
+      </div>
+       
+    <% end %>
+
+
+
+

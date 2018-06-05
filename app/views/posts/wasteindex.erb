@@ -25,8 +25,6 @@
 
 ///////////////////// INdexxxxxxxxx/////////////////////
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,59 +32,74 @@
 </head>
 <body>
 <div class="full-body">
-<% @posts.each do |x| %>
-<div class="img-div">
-    <%= image_tag(x.user.avatar.url(:thumb), :class => "round-image") %>
- </div>
-  <div class="username">
-    
-  <b><%= x.user.first_name if x.user %></b> 
-  <%= time_ago_in_words x.created_at %>
-  </div>
-<% if x.user_id == current_user.id %>
-   <div class="admin">
-    <div class="image"><%= image_tag x.image.url(:medium) %><br></div>
-     <div class="image_description">
-      <b><%= x.user.first_name if x.user %>
-      </b><%= x.description %>
-        <div class="image_action">
-        <td><%= link_to 'Edit', edit_post_path(x), class: "btn btn-info" %>
-        </td>
-        <td><%= link_to 'Destroy', post_path(x), method: :delete,
-        data: { confirm: 'Are you sure?' } , class: "btn btn-info"%>
-        </td>
+    <% @posts.each do |x| %>
+    <div class="post-body">
+
+    <div class="img-div">
+        <%= image_tag(x.user.avatar.url(:thumb), :class => "round-image") %>
+        <div class="username">
+        <b><%= x.user.first_name if x.user %></b>
+        <br>
+        <%= time_ago_in_words x.created_at %>
+        </div>
+      </div>
+
+  <% if x.user_id == current_user.id %>
+  <div class="admin">
+      <div class="image"><%= image_tag x.image.url(:medium) %><br></div>
+        <div class="image_description">
+           <b><%= x.user.first_name if x.user %>
+           </b><%= x.description %>
+           <div class="image_action">
+              <td><%= link_to 'Edit', edit_post_path(x), class: "btn btn-info" %>
+              </td>
+               <td><%= link_to 'Destroy', post_path(x), method: :delete,
+                data: { confirm: 'Are you sure?' } , class: "btn btn-info"%>
+                </td>
+           </div>
         </div>
        </div>
-     </div>
-<%else%>
-<div class="non-admin">
-  <div class="image">
-    <%= image_tag x.image.url(:medium) %><br>
+
+      <%else%>
+      
+      <div class="non-admin">
+        <div class="image">
+           <%= image_tag x.image.url(:medium) %><br>
+        </div>
+        <div class="test">
+           <div class="image_description">
+              <b><%= x.user.first_name if x.user %></b>
+              <%= x.description %>
+           </div>
+        </div>
   </div>
-  <div class="test">
-    <div class="image_description">
-      <b><%= x.user.first_name if x.user %></b>
-      <%= x.description %>
-    </div>
-  </div>
-</div>
-<% end %> 
-    <div class="comment-form">
-      <% if x.comments %>
-        <% x.comments.each do |comment| %>
-            <b><%= comment.user.first_name %>
-            </b><%= comment.content %><br>
-        <% end %>
+  <% end %> 
+
+  <div class="comment-form">
+    <% if x.comments %>
+      <% x.comments.each do |comment| %>
+           <b><%= comment.user.first_name %>
+           </b><%= comment.content %><br>
       <% end %>
-        <%= form_for [x, x.comments.new] do |f| %>
-          <%= f.text_field :content, placeholder: 'Add a comment...'%>
-        <% end %>
-    </div>
-<% end %>
+    <% end %>
+
+   
+  </div>
+
+  </div>
+  <div class="comment-label">
+  <%= form_for [x, x.comments.new] do |f| %>
+    <%= f.text_field :content, placeholder: 'Add a comment...'%>
+    <% end %>
+  </div>
+  <div>
+    <br>
+  </div>
+
+  <% end %>
 </div>
 </body>
 </html>
-
 
 
 \\
@@ -97,37 +110,36 @@ cssssss
 
 
 
-
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .image, username {
-display: block;
-margin-left: auto;
-margin-right: auto;
-width: 40%;
-
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
 
-.image_description, .username, .comment-form, .img-div{
-
-margin-left: auto;
-margin-right: auto;
-width: 40%;
+.image_description, .username{
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    position: relative;
 }
 
 .username{
-  margin-top:2rem;
-  font-size:1.5rem;
-  color:blue;
+      position: relative;
+    top: -44px;
+    margin-top:2rem;
+    font-size:1rem;
+    color:blue;
 }
 
 .full-body{
-  margin: 0 0 20px;
-  padding: 30px;
-  width: 320;
+    margin: 0 0 20px;
+    padding: 30px;
+    width: 320;
   
 }
 
@@ -139,3 +151,102 @@ width: 40%;
     height: 50px;
     border-radius: 50px;
 }
+
+
+
+.post-body{
+    position: relative;
+    left: 132px;
+    box-sizing: content-box;
+    border: solid 1px red;
+    background-color: white;
+    width: 500px;
+    height: 600px;
+}
+
+.img-div{
+    position: relative;
+    left: 10px;
+    top: 25px; 
+    width: 40%;
+}
+
+.comment-form{
+
+    left: -150px;
+    top: 30px;
+    }
+
+
+.admin, .non-admin{
+    position: relative;
+    left: -150px;
+}
+
+.comment-label{
+    position: relative;
+    left: 132px;
+}
+
+
+
+
+neewwww indexxx 
+
+
+
+
+<article class="post-row content-center">
+  <headre class="post-header flex-row">
+ <% @posts.each do |x| %>
+  <%= image_tag(x.user.avatar.url(:thumb), :class => "profile-img rounded-circle", :size => "28x28") %>
+  <%= x.user.first_name if x.user :class => "post-username" %>
+    <span class="post-time"><%= time_ago_in_words(x.created_at) %></span>
+  </headre>
+  <div class="post-body">
+    <%= image_tag(x.image ? x.image : "avatar_default.png", :size => "600x600", 
+                                          :class => "post-img" %>
+    <div class="icon l-b-w"></div>                                          
+  </div>
+  <footer class="post-footer">
+    <div class="post-comments flex-col">
+      <h6 class="view-more"><%= pluralize(x.comments.count, 'Comment') %></h6>    
+       <div class="react flex-row">         
+         <%= form_for [x, x.comments.new], :html => {:class => 'new-comment'} do |f| %>
+            <%= f.text_field :text, :class => "comment", :placeholder => "Add a comment... ", :autocomplete => 'off' %>
+          <% end %>
+        </div>
+    </div>
+  </footer>
+  <% end %>
+</article>
+ 
+
+
+
+ ///////////newwww
+
+
+ <div class="new-post">
+  <article class="form content-center">
+
+<%= form_for @post, html: { multipart: true } do |f| %>
+      <div class="form-body flex-col">
+        <%= f.label :image, :class=> "btn-file flex-row" do %>
+          <%= f.file_field :image, accept: 'image/png,image/jpg,image/jpeg', 
+          :class => "inputfile", :id => 'post_media' %>
+          <span class="title">Upload File From Library...</span>
+          <div class="icon icon-add"></div>
+        <% end %>
+        <%= image_tag("post_img_default.png", :size => "300x300", :class => "post-media") %>
+      </div>
+      <footer class="form-footer">
+        <div class="post-caption flex-row">
+          <%= f.text_area :description, :rows => "2", :class => "caption", 
+              :placeholder => "Say Somthing..." %>
+          <%= f.submit "Post", :class => "btn btn-post" %>   
+        </div>
+      </footer>
+    <% end %>
+  </article>  
+</div>

@@ -16,3 +16,96 @@
   </p>
 <% end %>
 
+
+
+
+
+/////////////current
+
+
+
+
+
+<div class="col-md-4">
+<% @user = current_user %>
+
+<%= image_tag @user.avatar%>
+
+<%= @user.email %><br/>
+
+<% @user ||= current_user %>
+
+<div>		  
+	<strong id="following">
+		<%= @user.following.count %>
+	</strong>following
+	
+<strong id="followers">
+	<%= @user.followers.count %>
+</strong>followers
+</a>
+</div>
+</div>
+
+
+
+
+////updatessss
+
+
+  <div class="container profile-view">
+    <div class="row info-row">
+      <!-- Info Row -->
+      <div class="col-md-3">
+          <% @user = current_user %>
+               <%= image_tag @user.avatar%>
+       </div>
+
+       <div class="col-md-6 offset-1">
+         <div class="profile-info flex-col">
+           <div class="row row-1 flex-row">
+             <h4 class="username">
+             	<b><%= @user.Username %></b></h4>
+						<%= @user.email %><br/>
+	    	</div> 		
+		<% @user ||= current_user %>
+
+	<div class="row row-2 flex">
+	  <a href="#" class="posts disabled"><strong><%= @user.posts.count %></strong> Posts</a>
+	  <%= link_to "#", :class => "followers disabled" do  %>
+	    <strong><%= @user.followers.count %></strong> Followers
+	  <% end %>
+	  <%= link_to "#", :class => "following disabled" do  %>
+	    <strong><%= @user.following.count %></strong> Followings
+	  <% end %>
+	</div>
+</div>
+      </div>
+      </div>
+  </div>
+
+
+
+
+
+
+////// newww follow n unfollow
+
+
+
+<% if @user == current_user %>
+  <%= link_to 'Edit Profile',class: "btn edit-button" %>  
+  <% end %>
+
+  <% if current_user.id = @user.follow.id%>
+    <%= link_to "Following", relationships_unfollow_user_path, remote: true,
+      class: 'btn unfollow-button', id: 'unfollow-button', method: :post %>
+      
+      
+      
+  <% end %>
+  <% else %>
+    <%= link_to "Follow", relationships_follow_user, remote: true, 
+    class: 'btn follow-button', id: 'follow-button', method: :post%>
+      
+

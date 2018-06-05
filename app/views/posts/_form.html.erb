@@ -1,15 +1,23 @@
+<div class="new-post">
+  <article class="form content-center">
+
 <%= form_for @post, html: { multipart: true } do |f| %>
-
-<%= f.label :image %>
-<%= f.file_field :image %>
-<br>
-
-<%= f.label :description %>
-
-<%= f.text_area :description %>
-<br>
-
-
-<%= f.submit %>
-
-<% end %>
+      <div class="form-body flex-col">
+        <%= f.label :image, :class=> "btn-file flex-row" do %>
+          <%= f.file_field :image, accept: 'image/png,image/jpg,image/jpeg', 
+          :class => "inputfile", :id => 'post_media' %>
+          <span class="title">Upload File From Library...</span>
+          <div class="icon icon-add"></div>
+        <% end %>
+        <%= image_tag("post_img_default.png", :size => "300x300", :class => "post-media") %>
+      </div>
+      <footer class="form-footer">
+        <div class="post-caption flex-row">
+          <%= f.text_area :description, :rows => "2", :class => "caption", 
+              :placeholder => "Say Somthing..." %>
+          <%= f.submit "Post", :class => "btn btn-post" %>   
+        </div>
+      </footer>
+    <% end %>
+  </article>  
+</div>

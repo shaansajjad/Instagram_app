@@ -56,3 +56,24 @@
 </body>
 </html>
 
+
+
+
+
+///// For image
+
+<div class="form-group">
+        <%= f.label :avatar, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+            <%= f.file_field :avatar %>
+
+
+            <div onclick= "myFunction()" class="image-click"style="
+              height: 100px;
+              width: 100px;
+              background-color: red;
+              margin: 20px auto;
+              border-radius: 50px;"> 
+            </div>
+        </div>
+    </div>
