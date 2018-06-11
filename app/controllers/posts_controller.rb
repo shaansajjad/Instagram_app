@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!, only:[:new, :vote]
+  # before_action :authenticate_user!
+  # before_action :upvote, except: :index
+  respond_to :js, :json, :html
 
   def new
     @post = current_user.posts.build
@@ -7,8 +10,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @post = Post.last
   end
-
 
   def show
     @post = Post.find(params[:id])
@@ -32,27 +35,32 @@ class PostsController < ApplicationController
   end
 
   def update
-   @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
 
-   if @post.update(post_params)
-    redirect_to @post
-  else
-    render 'edit'
+    if @post.update(post_params)
+      redirect_to @post
+    else
+      render 'edit'
+    end
   end
-end
 
+  def vote
+    if !current_user.liked? @post
+      @post.liked_by current_user
+    elsif current_user.liked? @post
+      @post.unliked_by current_user
+    end
+  end
 
-def destroy
-  @post = Post.find(params[:id])
-  @post.destroy
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
+  end
 
-  redirect_to posts_path
-end
+  private
 
-
-private
-def post_params
- params.require(:post).permit(:image,:description)
-end
-
+  def post_params
+    params.require(:post).permit(:image,:description)
+  end
 end

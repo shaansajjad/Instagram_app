@@ -1,68 +1,92 @@
 <style>
-  .signup-box{
-    position: relative;
-    top: -583px;
-    left: 527px;
-}
-  .avatar-edit{
-     position:  relative;
-    top: 143px;
-    left: 137px;
-
+.img-box img{
+  border-radius: 111px;
 }
 
+.img-cover{
+  position:  relative;
+      top: -16px;
+      left: -18px;
+}
 </style>
-<div class="row">
-  <div class="col-sm-6">
-    <img class="iphone-image" src="/assets/iphone.jpg" alt="iphone">
-    </div>
-  </div>
-  <h5>Edit <%= resource_name.to_s.humanize %>
-  </h5><%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %><%= devise_error_messages! %>
-  <div class="col-sm-6">
-    <div class= "avatar-edit"><%= f.file_field :avatar %>
-    </div>
-  </div>
-  <br>
-    <br>
-      <div class="col-sm-8">
-        <div class="signup-box">
-          <div class="field"><%= f.label :first_name %>
-            <br /><%= f.text_field :first_name, autofocus: true %>
+
+<div class="container account-view">
+  <div class="row">
+    <div class="col-md-9 col-9">
+      <div class="tab-content">
+        <div class="tab-pane active" id="edit-profile" role="tabpanel">
+          <div class="container edit-profile-col">
+            <div class="row img-row">
+              <div class="col-md-3 img-box">
+                <%= image_tag(@user.avatar ? @user.avatar : "avatar_default.png", 
+                              :size => "80x80", :class => "profile-pic rounded-circle") %>
+                <div class="img-cover" id="profile-uploader">
+                  <div class="icon img-icon"></div>
+                </div>
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                <%= devise_error_messages! %>
+                <%= f.label :avatar, :class=> "btn btn-file img-cover" do %>
+                <%= f.file_field :avatar, accept: 'image/png,image/jpg,image/jpeg', 
+                   :class => "inputfile", :id => 'user_avatar' %>
+                <div class="icon img-icon">
+                  
+                </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="row edit-form">
+              <div class="form-group row"><%= f.label :first_name, :class => "col-xs-2 col-form-label" %>
+                <div class="col-xs-8"><%= f.text_field :first_name, :class => "form-control" %>
+                </div>
+              </div>
+              <div class="form-group row"><%= f.label :last_name, :class => "col-xs-2 col-form-label" %>
+                <div class="col-xs-8"><%= f.text_field :last_name, :class => "form-control" %>
+                </div>
+              </div>
+              <div class="form-group row"><%= f.label :Username, :class => "col-xs-2 col-form-label" %>
+                <div class="col-xs-8"><%= f.text_field :Username, :class => "form-control" %>
+                </div>
+              </div>
+              <div class="form-group row"><%= f.label :email, :class => "col-xs-2 col-form-label" %>
+                <div class="col-xs-8"><%= f.email_field :email, autofocus: true, autocomplete: "email", :disabled => true%>
+                </div>
+              </div>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+              </div>
+              <% end %>
+              <div class="form-group row"><%= f.label :birthday, :class => "col-xs-2 col-form-label" %>
+                <div class="col-xs-8"><%= f.date_field :birthday, :class => "form-control" %>
+                </div>
+              </div>
+              <div class="form-group row"><%= f.label :password, :class => "col-xs-2 col-form-label" %>
+                <i>(leave blank if you don't want to change it)</i>
+                <br />
+                <div class="col-xs-8"><%= f.password_field :password, :class => "form-control" %><% if @minimum_password_length %>
+                  <br />
+                  <em><%= @minimum_password_length %> characters minimum
+                  </em><% end %>
+                </div>
+              </div>
+              <div class="form-group row"><%= f.label :password_confirmation, :class => "col-xs-2 col-form-label" %>
+                <div class="col-xs-8"><%= f.password_field :password_confirmation, :class => "form-control" %>
+                </div>
+              </div>
+              <div class="form-group row"><%= f.label :current_password, :class => "col-xs-2 col-form-label" %>
+                <div class="col-xs-8"><%= f.password_field :current_password,  :class => "form-control" %>
+                </div>
+              </div>
+
+              <div class="actions"><%= f.submit "Update" %>
+                </div>
+              <h3>Cancel my account</h3>
+              <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+              </p><%= link_to "Back", :back %>
+
+              <% end %>
+            </div>
           </div>
-          <div class="field"><%= f.label :last_name %>
-            <br /><%= f.text_field :last_name, autofocus: true %>
-          </div>
-          <div class="field"><%= f.label :Username %>
-            <br /><%= f.text_field :Username, autofocus: true %>
-          </div>
-          <div class="field"><%= f.label :email %>
-            <br /><%= f.email_field :email, autofocus: true, autocomplete: "email", :disabled => true%>
-          </div><% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %>
-          </div><% end %>
-          <div class="field"><%= f.label :birthday %>
-            <br /><%= f.date_field :birthday, autofocus: true %>
-          </div>
-          <div class="field"><%= f.label :password %>
-            <i>(leave blank if you don't want to change it)</i>
-            <br /><%= f.password_field :password, autocomplete: "off" %><% if @minimum_password_length %>
-            <br />
-            <em><%= @minimum_password_length %> characters minimum
-          
-            </em><% end %>
-          </div>
-          <div class="field"><%= f.label :password_confirmation %>
-            <br /><%= f.password_field :password_confirmation, autocomplete: "off" %>
-          </div>
-          <div class="field"><%= f.label :current_password %>
-            <i>(we need your current password to confirm your changes)</i>
-            <br /><%= f.password_field :current_password, autocomplete: "off" %>
-          </div>
-          <div class="actions"><%= f.submit "Update" %>
-          </div><% end %>
-          <h3>Cancel my account</h3>
-          <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
-          </p><%= link_to "Back", :back %>
         </div>
       </div>
+    </div>
+  </div>

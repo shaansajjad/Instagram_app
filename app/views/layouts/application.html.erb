@@ -7,45 +7,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %><%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %><%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+  </script>
 </head>
 <body>
 <%= favicon_link_tag 'favicon.ico' %>
   <% if user_signed_in? %>
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-default"> 
     <div class="container-fluid">
       <div class="navbar-header">
         <%= link_to("Instagram", root_path, :class => "navbar-brand") %>
       </div>
-      <ul class="nav navbar-nav">
-        <li><%= link_to "NewPost", new_post_path %></li>
-         <li> <%= link_to("Discover", discovery_path, :class => "navbar-brand") %></li>
-
-      </ul>
-
-      <form class="navbar-form navbar-left">
-        <div class="search-bar">
+  
+    <div class="search-user">
+        <%= link_to("Search", new_search_path, :class => "glyphicon glyphicon-search") %>
+        <!-- <div class="search-bar">
         <div class="search-field flex-row">
           <div class="icon s-icon"></div>
           <input type="text" placeholder="Search" class="search-query" name="query" autocomplete="off">  
         </div>
         <div class="search-result hide-result" id="search-result"></div>
+      </div> -->
       </div>
-      </form>
-      
-      <ul class="nav navbar-nav navbar-right">
-         
-               <li><%= link_to "My profile", profiles_path %></li>
 
-               <li><%= link_to "Sign_out", destroy_user_session_path, :method => 'delete' %>
-               </li>
-             
+      <ul class="nav navbar-nav navbar-right"> 
+              <li><%= link_to("Discover", discovery_path, :class => "glyphicon glyphicon-plus") %></li>
+               <li><%= link_to "NewPost", new_post_path %></li>
+               <li><%= link_to "Profile", profiles_path, :class => 
+               "glyphicon glyphicon-user" %></li>
+               <li><%= link_to "Logout", destroy_user_session_path, :method => 'delete' %>
+               </li>            
           </ul>
     </div>
   </nav>
   <% end %>
-
-
   <div class= "container"><% flash.each do |name,msg| %><%= content_tag(:div, msg, class: "alert alert-info") %><% end %><%= yield %>
   </div>
 </body>

@@ -15,11 +15,12 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-glyphicons'
 gem 'jquery-rails'
 gem 'devise', '~> 4.2'
-gem 'simple_form'
 gem 'semantic-ui-sass'
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
+gem 'acts_as_votable', '~> 0.10.0'
 
 
 group :development, :test do

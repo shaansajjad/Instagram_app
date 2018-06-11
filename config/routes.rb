@@ -21,12 +21,16 @@ Rails.application.routes.draw do
 	 get 'unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
 
 	resources :profiles
+	resources :searches
 	get 'profiles/show'
 
 	resources :posts do
-	resources :comments
-	resources :likes, :only => [:create, :destroy]
-
+		resources :comments
+			member do
+				put "like" => "posts#vote"
+			# resources :likes, :only => [:create, :destroy]
+			end
 	end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+	
 end

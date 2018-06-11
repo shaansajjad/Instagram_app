@@ -2,100 +2,146 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.image, username {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-}
+.post-row{
+    background-color: #f9f9f9;
+    margin-top: 60px;
+    width: 600px;
+    .post-header{
+        height: 64px;
+        width: 100%;
+        padding: 14px 20px;
+        .post-username {
+          color: #222;
+          margin-right: auto;
+          margin-top: 3px;
+          margin-left: 10px;
+          text-decoration: none;
+          transition: color .5s;
+          &:hover{
+            color: rgba(32, 169, 152, 0.7);
+          }
+        }
+        .profile-img{
 
-.image_description, .username{
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
+               border-radius: 111px;
+    height: 60px;
+    width: 60px;
     position: relative;
-}
-
-.username{
-      position: relative;
-    top: -44px;
-    margin-top:2rem;
-    font-size:1rem;
-    color:blue;
-}
-
-.full-body{
-    margin: 0 0 20px;
-    padding: 30px;
-    width: 320;
-  
-}
-
-
-.round-image{  
-    margin-top: 40px;  
-    margin-bottom: -18px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-}
-
-
-
-.post-body{
-    position: relative;
-    left: 132px;
-    box-sizing: content-box;
-    border: solid 1px grey;
-    background-color: white;
-    width: 500px;
-    height: 600px;
-}
-
-.img-div{
-    position: relative;
-    left: 10px;
-    top: 25px; 
-    width: 40%;
-}
-
-.comment-form{
-
-    left: -150px;
-    top: 30px;
+    top: 6px;
+        }
+        .post-time {
+        position: relative;
+        left: 400px;
+          font-size: 10px;
+          font-weight: 400;
+          margin-top: 5px;
+        }
+    }
+    .post-body{
+        position: relative;
+        top: 14px;
+        .post-img{
+            width: 600px;
+            height: 561px;
+        }
+        .l-b-w{
+            position: absolute;
+            background-position: 1px -55px;
+            width: 95px;
+            height: 78px;
+            top: 40%;
+            left: 42%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .6s ease;
+        }
+    }
+    .post-footer{
+        padding: 0 24px;
+        .post-loves {
+          padding: 14px 0px;
+          .loves {
+            font-size: 15px;
+            margin-top: 4px;
+             font-weight: 500;
+          }
+        }
+        .username{
+          font-size: 15px;
+          color: #222;
+        }
+        .link-to,
+        .read-more{
+          color: #222;
+          font-weight: 500;
+          margin-right: 6px;
+          text-decoration: none; 
+          transition: color .5s;
+          &:hover{
+                color: #999;
+          }
+        }
     }
 
+}
 
-.admin, .non-admin{
+
+.post-row{
+    margin: 0 auto;
+    margin-bottom: 58px;
+    .post-comments{
+        .view-more {
+          font-size: 14px;
+          color: #999;
+        }
+        .comments-list {
+          margin: 15px 0;
+          .user-comment{
+            display: flex;
+            font-size: 14px;
+            margin-bottom: -36px;
+            .link-to{
+                color: #222;
+                margin-right: 10px;
+                font-weight: 600;
+                letter-spacing: 0.6px;
+                text-decoration: none;
+            }
+            .comment{
+                    margin-bottom: 0;
+                    text-transform: lowercase;
+                    font-weight: 400;           
+            }
+          }
+        }
+        .comment{
+            border-top: 1px solid #efefef;
+            padding: 20px;
+            form{
+                width: 90%;
+            }
+            .comment{
+                border: none;
+                margin-left: -1px;
+                width: 73%;
+                font-size: 13px;
+                color: #999;
+            }
+        }       
+    }   
+}
+
+
+.l-b-w{
     position: relative;
-    left: -150px;
-}
-
-.comment-label{
-    position: relative;
-    left: 132px;
-}
-
-
-.post-loves {
-  padding: 14px 0px;
-}
-
-.loves {
-    font-size: 14px;
-margin-top: 10px;
-font-weight: 500
-  }
-
-  
-  .l-b-w{
-    position: absolute;
-    background-position: 1px -55px;
-    width: 95px;
-    height: 78px;
-    top: 40%;
-    left: 42%;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .6s ease;
-  }
+     left: 0px;
+      position: absolute;
+      background-position: 1px -55px;
+      width: 95px;
+      height: 78px;
+      top: 40%;
+      left: 42%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .6s ease;
+    }

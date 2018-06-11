@@ -1,27 +1,52 @@
-Discover New  People
-    <% @users.each do |user| %>
-<div class="block">
-      <div class="flex-row header">
+<div class="row discovery">
+  <div class="card">
+        <div class="card-header">
+          <h2>Discover New  People</h2>
+          <p>
+             <% link_to "Search", new_search_path  %>
+          </p>
 
-  <%= user.first_name+""+ user.last_name %>
-  <%= image_tag(user.avatar ? user.avatar : 'avatar_default.png', :class => "profile-img rounded-circle", :size => "28x28") %> 
+        </div>
+     <% @users.each do |user| %>
 
+     <div class="dis-people">
+      <div class="block">
+        <div class="flex-row header">
+              <div class="dis-img">
+                <%= image_tag(user.avatar ? user.avatar : 'avatar_default.png', :class => "profile-img rounded-circle", :size => "28x28") %> 
+              </div>
+              <div class="dis-user">
+               <b><%= user.email %></b></br>
+               <div class="dis-name">
+                <%= user.first_name+""+ user.last_name %>
+                </div>
+              </div>
 
-<% if user == current_user %>
+              <% if user == current_user %>
 
-  <%= link_to 'Edit Profile', profiles_path, :class=> "btn edit-button"%> 
-<% else %>
+              <div class="dis-edit">
 
-  <% if current_user_is_following(current_user.id, user.id) %>
+              <%= link_to 'View Profile', profiles_path, :class=> "btn follow-button"%> 
 
-    <%= link_to 'Following', unfollow_user_path(:Username => user.Username), :remote=> true, :class=> "btn unfollow-button", :id=> "unfollow-button"%>
+              </div>
+              <% else %>
 
-  <% else %>
-    <%= link_to 'Follow', follow_user_path(:Username => user.Username), :remote=> true, :class=> "btn follow-button", :id=> "follow-button"%>
-  <% end %>
-<% end %>
+                <div class="dis-foll">
+
+               <% if current_user_is_following(current_user.id, user.id) %>
+
+               <%= link_to 'Following', unfollow_user_path(:Username => user.Username), :remote=> true, :class=> "btn unfollow-button", :id=> "unfollow-button"%>
+
+               <% else %>
+               <%= link_to 'Follow', follow_user_path(:Username => user.Username), :remote=> true, :class=> "btn follow-button", :id=> "follow-button"%>
+               </div>
+               <% end %>
+               <% end %>
+             </div>
+       </div>
+       </div>
+
+       <% end %>
+       
+ </div>
 </div>
-</div>
-<% end %>
-
-

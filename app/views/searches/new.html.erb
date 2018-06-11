@@ -1,0 +1,12 @@
+<h1>Search the users</h1>
+
+<%= form_for @search do |f| %>
+	<div class="fields">
+		<%= f.label :Username %>
+		<%= f.text_field :keywords %>
+	</div>
+
+	<div class="actions">
+		<%= f.submit "Search" %>	
+	</div>
+<% end %>

@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .User-image img{
       height: 200px;
       width: 200px;
@@ -43,3 +42,21 @@
         color: white;
       }
     }
+
+
+
+   .prof-post-img img {
+    position: relative;
+    top: 26px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 300px;
+    height: 300px
+    
+}
+
+
+img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}

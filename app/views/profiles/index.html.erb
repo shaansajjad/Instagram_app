@@ -1,43 +1,47 @@
-
-<div class="container profile-view">
-  <div class="row info-row">
-    <!-- Info Row -->
-    <div class="col-md-6"><% @user = current_user %>
-      <div class="User-image"><%= image_tag @user.avatar %>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style></style>
+  </head>
+  <div class="container profile-view">
+    <div class="row info-row">
+      <!-- Info Row -->
+      <div class="col-md-6">
+        <% @user = current_user %>
+        <div class="User-image">
+          <%= image_tag @user.avatar %>
+        </div>
       </div>
-    </div>
-    <div class="col-md-6 offset-1">
-      <div class="profile-info flex-col">
-        <div class="row row-1 flex-row">
-          <h4 class="user-name">
-            <b><%= @user.Username %>
-            </b>
-          </h4><%= @user.email %>
-          <br/>
+      <div class="col-md-6 offset-1">
+        <div class="profile-info flex-col">
+            <div class="user-details">
+              <div class="row row-1 flex-row">
+
+                <h4 class="user-name">
+                  <b><%= @user.Username %>
+                  </b>
+                </h4><%= @user.email %>
+                <br/>
+                <div class="edit-buttn"><%= link_to("Edit Profile", edit_user_registration_path(@user), :class => "btn btn-default") %>
+                 </div>
+             </div>
+
+              <div class="row row-2 flex">
+                <a href="#" class="posts disabled">
+                  <strong><%= @user.posts.count %>
+                  </strong> Posts
+                    
+                </a><%= link_to "#", :class => "followers disabled" do  %>
+                <strong><%= @user.followers.count %>
+                </strong> Followers
+                    <% end %><%= link_to "#", :class => "following disabled" do  %>
+                <strong><%= @user.following.count %>
+                </strong> Followings
+                     <% end %>
+              </div>
+            </div>
         </div>
-        <% @user ||= current_user %>
-        <div class="row row-2 flex">
-          <a href="#" class="posts disabled">
-            <strong><%= @user.posts.count %>
-            </strong> Posts
-          </a><%= link_to "#", :class => "followers disabled" do  %>
-          <strong><%= @user.followers.count %>
-          </strong> Followers
-        <% end %><%= link_to "#", :class => "following disabled" do  %>
-          <strong><%= @user.following.count %>
-          </strong> Followings
-        <% end %>
-        </div>
-      
       </div>
     </div>
   </div>
-</div>
-
-
-
-
-
-
-
-
+  <div class="prof-post-img"><% @user.posts.each do |post| %><%= image_tag(post.image ? post.image : "post_img_default.png",  :class => "img-small") %><% end %>
+  </div>

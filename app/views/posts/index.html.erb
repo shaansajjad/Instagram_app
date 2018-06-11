@@ -1,67 +1,68 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title></title>
-  </head>
-  <body>
-<div class="full-body"><% @posts.each do |x| %>
-<div class="post-body">
-<div class="img-div">
-  <%= image_tag(x.user.avatar.url(:thumb),  :class => "round-image") %>
-  <div class="username">
-    <b><%= x.user.first_name if x.user %>
-    </b>
-    <br><%= time_ago_in_words x.created_at %>
+<head>
+  <title></title>
+</head>
+<body>
+  <% @posts.each do |x| %>
+  <article class="post-row content-center">
+    <headre class="post-header flex-row">
+      <%= image_tag x.user.avatar.url(:medium), :class => "profile-img" %>
+      <%= link_to(x.user.Username, profile_path(x.user), :class => "name") %>
+
+      <span class="post-time"><%= time_ago_in_words x.created_at %></span>
+    </headre>
+    <div class="post-body">
+      <%= image_tag(x.image ? x.image : "avatar_default.png", :size => "600x600", 
+      :class => "post-img") %>
+      <div class="icon l-b-w"></div>                                        
     </div>
-  </div><% if x.user_id == current_user.id %>
-  <div class="admin">
-    <div class="image"><%= image_tag x.image.url(:medium) %>
-      <br>
-      </div>
-      <div class="image_description">
-        <b><%= x.user.first_name if x.user %>
-        </b><%= x.description %>
-        <div class="image_action">
-          <td><%= link_to 'Edit', edit_post_path(x), class: "btn btn-info" %>
-          </td>
-          <td><%= link_to 'Destroy', post_path(x), method: :delete,
-        data: { confirm: 'Are you sure?' } , class: "btn btn-info"%>
-          </td>
-        </div>
-      </div>
-    </div><%else%>
-    <div class="non-admin">
-      <div class="image"><%= image_tag x.image.url(:medium) %>
-        <br>
-        </div>
-        <div class="test">
-          <div class="image_description">
-            <b><%= x.user.first_name if x.user %>
-            </b><%= x.description %>
-          </div>
-        </div>
-      </div><% end %>
+    <footer class="post-footer">
       <div class="post-loves">
-        <!--     <button class="glyphicon glyphicon-heart" data-method="post">
--->
-        <h2 class="loves"><%= pluralize(number_to_human(x.likes.count), 'Like') %>
-        </h2>
+        <a href="#">
+          <span class="glyphicon glyphicon-heart"></span>
+        </a>
+        <h2 class="loves"></h2>
       </div>
-
-      <div class="comment-form"><% if x.comments %><% x.comments.each do |comment| %>
-        <b><%= comment.user.first_name %>
-        </b><%= comment.content %>
-        <br><% end %><% end %>
+      <div class="username flex-row">
+        <p class="post-caption">
+         <b><%= x.user.first_name if x.user %></b>
+         <%= x.description %>
+       </p>  
+     </div>
+     <div class="post-comments flex-col">
+      <h6 class="view-more"><%= pluralize(x.comments.count, 'Comment') %></h6>
+      <div class="comments-list" %>
+        <% x.comments.each do |comment| %>       
+        <div class="user-comment">
+         <p class="comment">
+           <a href="" class="link-to">
+            <b><%= comment.user.Username %></b></a>
+            <%= comment.content %>
+          </p>  
         </div>
+        <% end %>
       </div>
 
-      <div class="comment-label"><%= form_for [x, x.comments.new] do |f| %><%= f.text_field :content, placeholder: 'Add a comment...'%><% end %>
-      </div>
-      
+      <% link_to like_post_path(@posts),class:"like-btn",method: :put, remote: :true do %>
       <div>
-        <br>
-        </div><% end %>
+        <span><p><i class="fa fa-thumbs-up fa-3x"></i></p></span>
       </div>
-    </body>
-  </html>
+      <% end %>
+      <span class="likes-count">
+        <%= @post.get_upvotes.size %>
+      </span>
+
+
+      <div class="comment flex-row">
+        <%= form_for [x, x.comments.new], :html => {:class => 'new-comment'} do |f| %>
+        <%= f.text_field :content, :class => "comment", :placeholder => "Add a comment...", :autocomplete => 'off'%>
+        <% end %>
+      </div>
+    </div>
+  </footer>
+</article>
+<% end %>
+</body>
+</html>
+

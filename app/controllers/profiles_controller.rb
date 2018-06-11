@@ -1,14 +1,14 @@
 class ProfilesController < ApplicationController
-	
-	def index
-		@users = User.all
-		@profiles = Profile.all
-	end
+
+  def index
+    @user = User.last
+    @profiles = Profile.all
+  end
 
 
-	def show
+  def show
+    @user = User.find(params[:id])
+  end
 
-	end
-	
 
 end
