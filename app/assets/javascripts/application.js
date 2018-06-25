@@ -10,10 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //= require jquery
-//= require bootstrap-sprockets
+//= require jquery_ujs
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
-// Loads all Semantic javascripts
-//= require semantic-ui
-//= require bootstrap.min
+//= require popper
+//= require bootstrap
+//= require bootstrap-sprockets
+//= require_tree

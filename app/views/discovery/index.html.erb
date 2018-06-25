@@ -1,52 +1,44 @@
-<div class="row discovery">
-  <div class="card">
-        <div class="card-header">
-          <h2>Discover New  People</h2>
-          <p>
-             <% link_to "Search", new_search_path  %>
-          </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head> 
+    <body>
+        <div class="top-margin">
+      <% @users.where.not(id: current_user.id).each do |user| %>
+        <main class="explore">
+            <section class="people">
+                <ul class="people__list">
+                    <li class="people__person">
+                        <div class="people__column">
+                            <div class="people__avatar-container">
+                                <%= image_tag(user.avatar ? user.avatar : "avatar.png", :class => "people__avatar") %> 
+                            </div>
+                            <div class="people__info">
+                                <span class="people__username">
+                                <%= user.Username %></span>
+                                <span class="people__full-name">
+                                <%= user.first_name+""+ user.last_name %>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="people__column">
+                            <% if current_user_is_following(current_user.id, user.id) %>
+                                  <%= link_to 'Following', unfollow_user_path(:Username => user.Username), :class=> "btn unfollow-button", :id=> "unfollow-button"%>
+                                  <% else %>
+                                  <%= link_to 'Follow', follow_user_path(:Username => user.Username), :class=> "btn follow-button", :id=> "follow-button"%>
+                            <% end %>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </section>
+        </main>
+        <% end %>
         </div>
-     <% @users.each do |user| %>
-
-     <div class="dis-people">
-      <div class="block">
-        <div class="flex-row header">
-              <div class="dis-img">
-                <%= image_tag(user.avatar ? user.avatar : 'avatar_default.png', :class => "profile-img rounded-circle", :size => "28x28") %> 
-              </div>
-              <div class="dis-user">
-               <b><%= user.email %></b></br>
-               <div class="dis-name">
-                <%= user.first_name+""+ user.last_name %>
-                </div>
-              </div>
-
-              <% if user == current_user %>
-
-              <div class="dis-edit">
-
-              <%= link_to 'View Profile', profiles_path, :class=> "btn follow-button"%> 
-
-              </div>
-              <% else %>
-
-                <div class="dis-foll">
-
-               <% if current_user_is_following(current_user.id, user.id) %>
-
-               <%= link_to 'Following', unfollow_user_path(:Username => user.Username), :remote=> true, :class=> "btn unfollow-button", :id=> "unfollow-button"%>
-
-               <% else %>
-               <%= link_to 'Follow', follow_user_path(:Username => user.Username), :remote=> true, :class=> "btn follow-button", :id=> "follow-button"%>
-               </div>
-               <% end %>
-               <% end %>
-             </div>
-       </div>
-       </div>
-
-       <% end %>
-       
- </div>
-</div>
+    </body>
+</html>

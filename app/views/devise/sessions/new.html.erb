@@ -1,52 +1,101 @@
-<style>
-.iphone-image{
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Login form using Material Design - Demo by W3lessons</title>
+  <!-- CORE CSS-->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 
-      position: relative;
-      top: 9px;
-      left: -21px;
-      max-height: 400%;
+<style type="text/css">
+html,
+body {
+    height: 100%;\
 }
-.sigin-box{
-      position: relative;
-      top: 69px;
-      left: 78px
+html {
+    display: table;
+    margin: auto;
 }
-
+body {
+    display: table-cell;
+    vertical-align: middle;
+    width: 50%;
+}
+.margin {
+  margin: 0 !important;
+}
 </style>
+  
+</head>
 
- <div class="container-fluid">
-      <div class="row">
-         <div class="col-sm-4">
-          <img class="iphone-image" src="/assets/iphone.jpg" alt="iphone">
-        </div>
-      
-    <div class="col-sm-8">
-      <div class="sigin-box">
-        <h2>Log in to Instagram</h2>
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-           <div class="form-group">
-              <%= f.label :email %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-           </div>
+<body>
 
-          <div class="form-group">
-              <%= f.label :password %><br />
-              <%= f.password_field :password, autocomplete: "off" %>
-           </div>
+  <div id="login-page" class="row">
+    <div class="col s12 z-depth-8 card-panel">
 
-          <% if devise_mapping.rememberable? -%>
-            <div class="form-group form-check">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
-            </div>
-           <% end -%>
-
-          <div class="actions">
-            <%= f.submit "Log in", :class => "btn btn-primary" %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="login-form">
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img class="responsive-img valign profile-image-login" src="/assets/profile.png" alt="" style="height: 80px">
+            <p class="center login-form-text">
           </div>
-           <% end %>
-        <%= render "devise/shared/links" %>
         </div>
-       </div>
+
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="mdi-social-person-outline prefix"></i>
+           <!--  <input class="validate" id="email" type="email">
+            <label for="email" data-error="wrong" data-success="right" class="center-align">Email</label> -->
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+          </div>
+        </div>
+
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="mdi-action-lock-outline prefix"></i>
+          <!--   <input id="password" type="password">
+            <label for="password">Password</label> -->
+            <%= f.password_field :password, autocomplete: "off", placeholder: "Password"%>
+          </div>
+        </div>
+
+        <div class="row"> 
+          <% if devise_mapping.rememberable? -%>
+          <div class="input-field col s12 m12 l12  login-text">
+              <input type="checkbox" id="remember-me" />
+              <label for="remember-me">Remember me</label>
+          </div>
+          <% end -%>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.submit "Log in", :class => "btn waves-effect waves-light col s12" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6 m6 l6">
+            <p class="margin medium-small">
+              <%= link_to "Register Now!", new_registration_path(resource_name) %>
+              </p>
+          </div>
+
+          <div class="input-field col s6 m6 l6">
+              <p class="margin right-align medium-small">
+                <%= link_to "Forgot password?", new_password_path(resource_name) %>
+              </p>
+          </div>          
+        </div>
+      </div>
+  <% end %>
+
     </div>
-</div>
+  </div>
+
+</body>
+
+</html>

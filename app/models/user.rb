@@ -3,16 +3,17 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
+  # has_attached_file :avatar, default_url: "avatar.png"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/avatar_default.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   has_one :profile, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   acts_as_voter
-
+  validates_associated :posts
   has_many :comments, dependent: :destroy
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
   has_many :followers, through: :follower_relationships, source: :follower

@@ -2,61 +2,81 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.User-image img{
-      height: 200px;
-      width: 200px;
-      border-radius: 111px;
-      
-  
+body {
+  padding-top: 54px;
 }
 
-  .user-name{
-    position: relative;
-    top: 10px;
-    left: 159pxpx;
-    font-size: 26px;
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+.profile{
+    width: 90%;
+    max-width: 1000px;
+    margin:0 auto;
+}
 
-    }
+.profile__header{
+    display: flex;
+    margin-bottom: 45px;
+}
 
+.profile__avatar-container{
+    width:30%;
+    display: flex;
+    justify-content: center;
+}
 
-    .follow-button {
-      text-transform: uppercase;
-      border-color: #4090db;
-      color: #4090db;
-      margin-left: 20px;
-      &:visited, &:focus, &:hover {
-        border-color: #2D6396;
-        color: #2D6396;
-      }
-    }
+.profile__name{
+    display: flex;
+    align-items:center;
+}
 
-    .unfollow-button {
-      text-transform: uppercase;
-      border-color: #66bd2b;
-      background-color: #66bd2b;
-      color: white;
-      margin-left: 20px;
-      &:visited, &:focus, &:hover {
-        border-color: #47821F;
-        background-color: #47821F;
-        color: white;
-      }
-    }
+.profile__title{
+    margin-right:20px;
+    font-size: 32px;
+    font-weight: 300;
 
+}
 
+.profile__button{
+    margin-right: 20px;
+    border:1px solid rgba(0,0,0,.0975);
+    color:black;
+    padding:5px 20px;
+    border-radius: 3px;
+}
 
-   .prof-post-img img {
-    position: relative;
-    top: 26px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    width: 300px;
-    height: 300px
-    
+.profile__button:hover{
+    color:white;
+    background-color:  #3897f0;
 }
 
 
-img:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+.profile__avatar{
+    width:152px;
+    height: 152px;
+    border-radius: 50%;
+    animation: 70.5s potato infinite linear;
+}
+
+
+
+.profile__name,
+.profile__numbers{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+
+.profile__numbers li{
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+
+
+#margin{
+    margin-top: 28px;
 }

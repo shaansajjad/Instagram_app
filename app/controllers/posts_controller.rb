@@ -1,9 +1,4 @@
 class PostsController < ApplicationController
-  # before_action :authenticate_user!, only:[:new, :vote]
-  # before_action :authenticate_user!
-  # before_action :upvote, except: :index
-  respond_to :js, :json, :html
-
   def new
     @post = current_user.posts.build
   end
@@ -11,20 +6,20 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @post = Post.last
+    # //for act_as_votable undefined method `get_upvotes' for nil:NilClass
   end
 
-  def show
-    @post = Post.find(params[:id])
-  end
-
+  # def show
+  #   @post = Post.find(params[:id])
+  # end
   def edit
     @post = Post.find(params[:id])
   end
 
   def create
-    p post_params
+    # p post_params
     @post = current_user.posts.build(post_params)
-    p @post
+    # p @post
     if @post.save!
       flash[:success] = "Your post has been created!"
       redirect_to posts_path
@@ -33,18 +28,17 @@ class PostsController < ApplicationController
       render :new
     end
   end
+  # def update
+  #   @post = Post.find(params[:id])
 
-  def update
-    @post = Post.find(params[:id])
-
-    if @post.update(post_params)
-      redirect_to @post
-    else
-      render 'edit'
-    end
-  end
-
+  #   if @post.update(post_params)
+  #     redirect_to @post
+  #   else
+  #     render 'edit'
+  #   end
+  # end
   def vote
+    @post = Post.find params[:id]
     if !current_user.liked? @post
       @post.liked_by current_user
     elsif current_user.liked? @post
@@ -52,12 +46,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-    redirect_to posts_path
-  end
-
+  # def destroy
+  #   @post = Post.find(params[:id])
+  #   @post.destroy
+  #   redirect_to posts_path
+  # end
   private
 
   def post_params

@@ -1,47 +1,63 @@
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style></style>
-  </head>
-  <div class="container profile-view">
-    <div class="row info-row">
-      <!-- Info Row -->
-      <div class="col-md-6">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <script>   
+    </script>
+    <body>
         <% @user = current_user %>
-        <div class="User-image">
-          <%= image_tag @user.avatar %>
+        <div class="container">
+            <section class="profile" style="margin-top: 42px;">
+                <header class="profile__header">
+                    <div class="profile__avatar-container">
+                      <%= image_tag(@user.avatar ? @user.avatar : "profile.png", 
+                       :class => "img-circle", :width => "140", :height => "140") %>
+                    </div>
+                   <div class="profile__info">
+                       <div class="profile__name">
+                           <h1 class="profile__title">
+                               <%= @user.Username %></h1><br>
+                           <%= link_to("Edit Profile", edit_user_registration_path(@user), :class => "profile__button") %>
+                           <div class="dropdown">
+                             <button class="fa fa-cog fa-2x" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <li><%= link_to "Logout", destroy_user_session_path, :method => 'delete' %>
+                               </li>   
+                             </div>
+                           </div>
+                       </div>
+                       <ul class="profile__numbers">
+                           <li class="profile__posts">
+                               <span class="profile__number">
+                               <b><%= @user.posts.count %></b></span> posts
+                           </li>
+                           <li class="profile__followers">
+                               <span class="profile__number">
+                               <b><%= @user.followers.count %></b></span> followers
+                           </li>
+                           <li class="profile__following">
+                               <span class="profile__number">
+                               <b><%= @user.following.count %></b></span> following
+                           </li>
+                       </ul>
+                   </div>
+                </header>
+                <div class="container">
+                  <% @user.posts.each_slice(3) do |posts| %>
+                  <div class="row text-center text-lg-left">
+                    <% posts.each do |post| %>
+                    <div class="col-lg-3 col-md-4 col-xs-6">
+                      <a href="#" class="d-block mb-4 h-100"> 
+                        <%= image_tag(post.image ? post.image : "post_img_default.png",  :class => "img-fluid mg-thumbnail", :id => "margin", :width => "100%", :height => "210px") %>
+                      </a></br>
+                    </div>
+                    <% end %>
+                  </div>
+                    <% end %>
+                </div>
+                </div>
+            </section>
         </div>
-      </div>
-      <div class="col-md-6 offset-1">
-        <div class="profile-info flex-col">
-            <div class="user-details">
-              <div class="row row-1 flex-row">
-
-                <h4 class="user-name">
-                  <b><%= @user.Username %>
-                  </b>
-                </h4><%= @user.email %>
-                <br/>
-                <div class="edit-buttn"><%= link_to("Edit Profile", edit_user_registration_path(@user), :class => "btn btn-default") %>
-                 </div>
-             </div>
-
-              <div class="row row-2 flex">
-                <a href="#" class="posts disabled">
-                  <strong><%= @user.posts.count %>
-                  </strong> Posts
-                    
-                </a><%= link_to "#", :class => "followers disabled" do  %>
-                <strong><%= @user.followers.count %>
-                </strong> Followers
-                    <% end %><%= link_to "#", :class => "following disabled" do  %>
-                <strong><%= @user.following.count %>
-                </strong> Followings
-                     <% end %>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="prof-post-img"><% @user.posts.each do |post| %><%= image_tag(post.image ? post.image : "post_img_default.png",  :class => "img-small") %><% end %>
-  </div>
+    </body>
+</html>

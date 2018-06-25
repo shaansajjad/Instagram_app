@@ -1,48 +1,57 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Instagram_app</title><%= csrf_meta_tags %>
+  <title>Instagram_app</title>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= csrf_meta_tags %>
+   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %><%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-  </script>
+   </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+ <style>
+ .navbar-brand{
+/*  background-image: url(/assets/Instagram_logo.svg.png);
+*/     color: grey;
+/*     font-family: 'Playfair Display', serif;
+*/     font-size: 35px;
+        margin-top: 23px;
+ }
+ </style>
 </head>
 <body>
-<%= favicon_link_tag 'favicon.ico' %>
-  <% if user_signed_in? %>
-  <nav class="navbar navbar-default"> 
+ <% if user_signed_in? %>
+  <nav class="navbar navbar" style="
+    margin-top: -53px;">
     <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <%= link_to("Instagram", root_path, :class => "navbar-brand") %>
-      </div>
-  
-    <div class="search-user">
-        <%= link_to("Search", new_search_path, :class => "glyphicon glyphicon-search") %>
-        <!-- <div class="search-bar">
-        <div class="search-field flex-row">
-          <div class="icon s-icon"></div>
-          <input type="text" placeholder="Search" class="search-query" name="query" autocomplete="off">  
-        </div>
-        <div class="search-result hide-result" id="search-result"></div>
-      </div> -->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to("Instagram", root_path, :class => "navbar-brand") %>      
       </div>
 
-      <ul class="nav navbar-nav navbar-right"> 
-              <li><%= link_to("Discover", discovery_path, :class => "glyphicon glyphicon-plus") %></li>
-               <li><%= link_to "NewPost", new_post_path %></li>
-               <li><%= link_to "Profile", profiles_path, :class => 
-               "glyphicon glyphicon-user" %></li>
-               <li><%= link_to "Logout", destroy_user_session_path, :method => 'delete' %>
-               </li>            
-          </ul>
-    </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a><%= link_to("", discovery_path, :class => "fa fa-compass fa-2x", :id => "compass") %></a>
+          <li><a><%= link_to "", new_post_path, :class => "fa fa-plus fa-2x", :id => "plus" %></a></li>
+          <li><a><%= link_to "", profiles_path, :class => "fa fa-user-o fa-2x", :id => "user" %></a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
   </nav>
-  <% end %>
-  <div class= "container"><% flash.each do |name,msg| %><%= content_tag(:div, msg, class: "alert alert-info") %><% end %><%= yield %>
-  </div>
+ <% end %>
+ <div class= "container"><% flash.each do |name,msg| %><%= content_tag(:div, msg, class: "alert alert-info") %><% end %><%= yield %>
+ </div>
 </body>
 </html>

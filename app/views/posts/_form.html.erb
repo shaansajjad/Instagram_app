@@ -1,9 +1,8 @@
 <div class="new-post">
-  <article class="form content-center">
-
+<div class="form-group">
 <%= form_for @post, html: { multipart: true } do |f| %>
       <div class="form-body flex-col">
-        <%= f.label :image, :class=> "btn-file flex-row" do %>
+        <%= f.label :image, :class=> "form-control-file" do %>
           <%= f.file_field :image, accept: 'image/png,image/jpg,image/jpeg', 
           :class => "inputfile", :id => 'post_media' %>
           <span class="title">Upload File From Library...</span>
@@ -13,11 +12,11 @@
       </div>
       <footer class="form-footer">
         <div class="post-caption flex-row">
-          <%= f.text_area :description, :rows => "2", :class => "caption", 
+          <%= f.text_area :description, :rows => "2", :class => "form-control", :style =>" width: 570px;", 
               :placeholder => "Say Somthing..." %>
-          <%= f.submit "Post", :class => "btn btn-post" %>   
+          <%= f.submit "Post", :class => "btn btn-primary" %>   
         </div>
       </footer>
     <% end %>
-  </article>  
+</div>
 </div>

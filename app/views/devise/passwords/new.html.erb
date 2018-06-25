@@ -1,32 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Forgot Password form using Material Design - Demo by W3lessons</title>
+  <!-- CORE CSS-->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+
+<style type="text/css">
+html,
+body {
+    height: 100%;
+}
+html {
+    display: table;
+    margin: auto;
+}
+body {
+    display: table-cell;
+    vertical-align: middle;
+    width: 150%;
+    height: 100%;
+    position:  relative;
+        left: -98px;
+        bottom: -113px;
+}
+.margin {
+  margin: 0 !important;
+}
+</style>
+  
 </head>
-<body>
-	<form class="ui form" >
-		<div class="ui grid">
-			<div class="ten wide column"></div>
-			<div class="six wide column">
-				<h2>Forgot your password?</h2>
 
-				<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-				<%= devise_error_messages! %>
+<body
+  <div id="login-page" class="row">
+    <div class="col s12 z-depth-6 card-panel">
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="mdi-social-person-outline prefix"></i>
+            <!-- <input class="validate" id="email" type="email">
+            <label for="email" data-error="wrong" data-success="right" class="center-align">Email</label> -->
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email"  %>
 
-				<div class="field">
-					<%= f.label :email %><br />
-					<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-				</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.submit "Recover my Password", :class => "btn waves-effect waves-light col s12" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6 m6 l6">
+            <p class="margin medium-small">
+            <%= link_to "Register Now!", new_registration_path(resource_name) %>
+          </div>
+          <div class="input-field col s6 m6 l6">
+              <p class="margin right-align medium-small">
+            <%= link_to "Login", new_session_path(resource_name) %>
+          </div>          
+        </div>
 
-				<div class="actions">
-					<%= f.submit "Send me reset password instructions" %>
-				</div>
-				<% end %>
-
-				<%= render "devise/shared/links" %>
-			</div>
-		</div>
-	</form>
+     <% end %>
+    </div>
+  </div>
 </body>
+
 </html>

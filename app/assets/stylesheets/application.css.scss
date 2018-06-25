@@ -19,47 +19,18 @@
  */
 
 
-#user_avatar {
-  margin: 20px auto;
-}
 
-.login{
-	color:blue;
-	
-}
-
-
-#top {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 99999;
-	background-color: white;
-	border-bottom: 1px solid #e7e7e7;
-}
-
-#body {
-	position: relative;
-	margin: auto;
-	width: 70%;
-}
-
-.container-fluid{
-background-color: #fff;
-    border-bottom: 1px solid rgba(0,0,0,.0975);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    -webkit-transition: height .2s ease-in-out;
-    transition: height .2s ease-in-out;
-    height: 55px;
-    }
-
-
-.search-user{
-    position: relative;
-        top: 14px;
-        left: 58px;
+    .navigation{
+        background-color:white;
+        height: 80px;
+        position: fixed;
+        width: 100%;
+        top:0;
+        border-bottom:1px solid rgba(0,0,0,.0975);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding:0px 50px;
+        box-sizing: border-box;
+        z-index:2;
     }

@@ -1,68 +1,78 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-</head>
-<body>
-  <% @posts.each do |x| %>
-  <article class="post-row content-center">
-    <headre class="post-header flex-row">
-      <%= image_tag x.user.avatar.url(:medium), :class => "profile-img" %>
-      <%= link_to(x.user.Username, profile_path(x.user), :class => "name") %>
-
-      <span class="post-time"><%= time_ago_in_words x.created_at %></span>
-    </headre>
-    <div class="post-body">
-      <%= image_tag(x.image ? x.image : "avatar_default.png", :size => "600x600", 
-      :class => "post-img") %>
-      <div class="icon l-b-w"></div>                                        
-    </div>
-    <footer class="post-footer">
-      <div class="post-loves">
-        <a href="#">
-          <span class="glyphicon glyphicon-heart"></span>
-        </a>
-        <h2 class="loves"></h2>
-      </div>
-      <div class="username flex-row">
-        <p class="post-caption">
-         <b><%= x.user.first_name if x.user %></b>
-         <%= x.description %>
-       </p>  
-     </div>
-     <div class="post-comments flex-col">
-      <h6 class="view-more"><%= pluralize(x.comments.count, 'Comment') %></h6>
-      <div class="comments-list" %>
-        <% x.comments.each do |comment| %>       
-        <div class="user-comment">
-         <p class="comment">
-           <a href="" class="link-to">
-            <b><%= comment.user.Username %></b></a>
-            <%= comment.content %>
-          </p>  
-        </div>
-        <% end %>
-      </div>
-
-      <% link_to like_post_path(@posts),class:"like-btn",method: :put, remote: :true do %>
-      <div>
-        <span><p><i class="fa fa-thumbs-up fa-3x"></i></p></span>
-      </div>
+<html lang="en">
+    <head>
+    </head> 
+    <body>
+      <% @posts.each do |x| %>
+        <main class="feed">
+            <section class="photo">
+                <header class="photo__header">
+                    <div class="photo__header-column">
+                      <%= image_tag x.user.avatar.url(:medium), :class => "photo__avatar" %>
+                    </div>
+                    <div class="photo__header-column">
+                        <span class="photo__username">
+                        <%= link_to(x.user.Username, profile_path(x.user)) %>
+                      </span>
+                    </div>
+                </header>
+                <div class="photo__file-container">
+                    <%= image_tag(x.image ? x.image : "avatar_default.png", :class => "photo__file") %>
+                </div>
+                <div class="photo__info">
+                    <div class="photo__icons">
+                        <span class="photo__icon">
+                              <%= link_to "<i class='fa fa-heart-o heart fa-lg #{x.id} #{current_user.liked?(x) ? 'liked' : 'like-btn'}'></i>".html_safe, like_post_path(x), method: :put, remote: :true %>
+                            
+                        </span>
+                        <span class="photo__icon">
+                            <i class="fa fa-comment-o fa-lg"></i>
+                        </span>
+                    </div>
+                    <span class="photo__likes <%= x.id %>">
+                    <%= x.get_upvotes.size %> likes
+                  </span>
+                    <div class="photo__comments">
+                        <li class="photo__comment">
+                            <span class="photo__comment-author">
+                            <b><%= x.user.first_name if x.user %></b>
+                            </span>
+                            <%= x.description %>
+                        </li>
+                        <div class="accordion" id="accordionExample<%= x.id %>">
+                          <div class="card">
+                            <div class="card-header" id="headingOne" style="
+                                background: white;>
+                              <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne<%= x.id %>" aria-expanded="true" aria-controls="collapseOne<%= x.id %>">
+                                  View  <%= pluralize(x.comments.count, 'Comment') %>
+                                </button>
+                              </h5>
+                            </div>
+                            <div id="collapseOne<%= x.id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample<%= x.id %>">
+                              <div class="card-body">
+                                <% x.comments.each do |comment| %> 
+                                  <li class="photo__comment">
+                                      <span class="photo__comment-author">
+                                        <b><%= comment.user.Username %></b>
+                                      </span>
+                                      <%= comment.content %>
+                                  </li>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                  <!--   <span class="photo__time-ago">hours ago</span> -->
+                    <div class="photo__add-comment-container">
+                        <%= form_for [x, x.comments.new], :html => {:class => 'new-comment'} do |f| %>
+                        <%= f.text_field :content, :class => "photo__add-comment", :placeholder => "Add a comment...", :autocomplete => 'off'%>
+                        <% end %>                        
+                    </div>
+                </div>
+            </section>
+        </main>      
       <% end %>
-      <span class="likes-count">
-        <%= @post.get_upvotes.size %>
-      </span>
-
-
-      <div class="comment flex-row">
-        <%= form_for [x, x.comments.new], :html => {:class => 'new-comment'} do |f| %>
-        <%= f.text_field :content, :class => "comment", :placeholder => "Add a comment...", :autocomplete => 'off'%>
-        <% end %>
-      </div>
-    </div>
-  </footer>
-</article>
-<% end %>
-</body>
+    </body>
 </html>
 
